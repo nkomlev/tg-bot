@@ -7,7 +7,7 @@ const bot = new TelegramBot(token, { polling: true });
 const userStates = {}
 
 bot.on('polling_error', (error) => {
-  console.error('Полная ошибка Polling:', error); // Теперь мы увидим детали
+  console.error('Полная ошибка Polling:', error);
 });
 
 bot.onText(/\/start/, (msg) => {
@@ -139,6 +139,8 @@ bot.on('message', async (msg) => {
       } catch (error) {
         console.error('Ошибка отправки аудио:', error);
       }
+
+      userStates[chatId] = null;
     } else {
       bot.sendMessage(chatId, '🤗Отправь мне, пожалуйста, голосовое сообщение чтобы я мог насладиться игрой)');
     }
